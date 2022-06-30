@@ -1,0 +1,31 @@
+{
+  "name": "BadgesAvro",
+  "type": "record",
+  "namespace": "com.techteam.beam.avro",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "date",
+      "type": "string"
+    },
+    {
+      "name": "user_id",
+      "type": "string"
+    },
+    {
+      "name": "class",
+      "type": "string"
+    },
+    {
+      "name": "tag_based",
+      "type": "boolean"
+    }
+  ]
+}

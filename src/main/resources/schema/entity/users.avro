@@ -1,0 +1,59 @@
+{
+  "name": "UsersAvro",
+  "type": "record",
+  "namespace": "com.techteam.beam.avro",
+  "fields": [
+    {
+      "name": "id",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "display_name",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "about_me",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "age",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "creation_date",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "last_access_date",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "location",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "reputation",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "up_votes",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "down_votes",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "views",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "profile_image_url",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "website_url",
+      "type": ["null", "string"]
+    }
+  ]
+}

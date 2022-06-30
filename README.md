@@ -1,1 +1,27 @@
-# apache-beams-for-learning
+# stackoverflow-bq-to-gs
+1. Set up google cloud CLI
+2. Run "gcloud auth application-default login" to login
+3. Run command for run project:
+   mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqProject=ivory-ego-347104 --bqTabless=votes --outputFolderFolder=data/ --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/ --schemaFolder=D:/working/projects/tech_team/stackoverflow-bq-to-gs/src/main/resources/schema/entity/" -Pdirect-runner
+   
+- votes: mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqProject=ivory-ego-347104 --bqTables=votes --outputFolder=votes-data --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/" -Pdirect-runner
+- badges: mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqTables=badges --outputFolderFolder=badges-data --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/" -Pdirect-runner
+- tags: mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqTables=tags --outputFolderFolder=tags-data --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/" -Pdirect-runner
+- users: mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqTables=users --outputFolder=users-data --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/" -Pdirect-runner
+- comments: mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqTables=comments --outputFolder=comments-data --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/" -Pdirect-runner
+- stackoverflow_posts: mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqTables=stackoverflow_posts --outputFolder=stackoverflow-posts-data --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/" -Pdirect-runner
+- post_links: mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqTables=post_links --outputFolder=post-links-data --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/" -Pdirect-runner
+- posts_answers: mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqTables=posts_answers --outputFolder=posts-answers-data --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/" -Pdirect-runner
+- posts_moderator_nomination: mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqTables=posts_moderator_nomination --outputFolder=posts-moderator-nomination-data --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/" -Pdirect-runner
+- posts_orphaned_tag_wiki: mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqTables=posts_orphaned_tag_wiki --outputFolder=posts-posts-orphaned-tag-wiki-data --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/" -Pdirect-runner
+- posts_privilege_wiki: mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqTables=posts_privilege_wiki --outputFolder=posts-privilege-wiki-data --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/" -Pdirect-runner
+- posts_questions: mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqTables=posts_questions --outputFolder=posts-questions-data --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/" -Pdirect-runner
+- posts_tag_wiki: mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqTables=posts_tag_wiki --outputFolder=posts-tag-wiki-data --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/" -Pdirect-runner
+- posts_tag_wiki_excerpt: mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqTables=posts_tag_wiki_excerpt --outputFolder=posts-tag-wiki-excerpt-data --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/" -Pdirect-runner
+- posts_wiki_placeholder: mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqTables=posts_wiki_placeholder --outputFolder=posts-wiki-placeholder-data --limit=100 --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/" -Pdirect-runner
+
+- all: mvn compile exec:java -Dexec.mainClass=com.techteam.beam.main.BigQueryReadMain -Dexec.args="--project=ivory-ego-347104 --bqProject=ivory-ego-347104 --bqTables=votes,badges,tags,users,comments,stackoverflow_posts,post_links,posts_answers,posts_moderator_nomination,posts_orphaned_tag_wiki,posts_privilege_wiki,posts_questions,posts_tag_wiki,posts_tag_wiki_excerpt,posts_wiki_placeholder --outputFolder=data/ --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/" -Pdirect-runner
+
+- spark:
+spark-submit --class com.techteam.beam.main.BigQueryReadMain --master spark://HOST:PORT target/beam-examples-1.0.0-shaded.jar --runner=SparkRunner --bqProject=ivory-ego-347104 --bqTables=votes,badges,tags,users,comments,stackoverflow_posts,post_links,posts_answers,posts_moderator_nomination,posts_orphaned_tag_wiki,posts_privilege_wiki,posts_questions,posts_tag_wiki,posts_tag_wiki_excerpt,posts_wiki_placeholder --outputFolder=data/ --tempLocation=gs://rawdata-stackoverflow-2022/staging-data/
+

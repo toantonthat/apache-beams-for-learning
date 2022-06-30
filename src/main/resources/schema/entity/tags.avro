@@ -1,0 +1,27 @@
+{
+  "name": "TagsAvro",
+  "type": "record",
+  "namespace": "com.techteam.beam.avro",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "tag_name",
+      "type": "string"
+    },
+    {
+      "name": "count",
+      "type": "string"
+    },
+    {
+      "name": "excerpt_post_id",
+      "type": "string"
+    },
+    {
+      "name": "wiki_post_id",
+      "type": "string"
+    }
+  ]
+}

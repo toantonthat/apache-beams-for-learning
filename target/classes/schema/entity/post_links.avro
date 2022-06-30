@@ -1,0 +1,27 @@
+{
+  "name": "PostLinksAvro",
+  "type": "record",
+  "namespace": "com.techteam.beam.avro",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "creation_date",
+      "type": "string"
+    },
+    {
+      "name": "link_type_id",
+      "type": "string"
+    },
+    {
+      "name": "post_id",
+      "type": "string"
+    },
+    {
+      "name": "related_post_id",
+      "type": "string"
+    }
+  ]
+}

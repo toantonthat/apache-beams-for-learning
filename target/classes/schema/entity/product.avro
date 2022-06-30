@@ -1,0 +1,23 @@
+{
+  "name": "ProductAvro",
+  "type": "record",
+  "namespace": "com.techteam.beam.avro",
+  "fields": [
+    {
+      "name": "ProductId",
+      "type": "int"
+    },
+    {
+      "name": "ProductName",
+      "type": "string"
+    },
+    {
+      "name": "ProductTypeId",
+      "type": "int"
+    },
+    {
+      "name": "Price",
+      "type": "double"
+    }
+  ]
+}

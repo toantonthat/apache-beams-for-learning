@@ -1,0 +1,87 @@
+{
+  "name": "PostsTagWikiAvro",
+  "type": "record",
+  "namespace": "com.techteam.beam.avro",
+  "fields": [
+    {
+      "name": "id",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "title",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "body",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "accepted_answer_id",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "answer_count",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "comment_count",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "community_owned_date",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "creation_date",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "favorite_count",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "last_activity_date",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "last_edit_date",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "last_editor_display_name",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "last_editor_user_id",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "owner_display_name",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "owner_user_id",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "parent_id",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "post_type_id",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "score",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "tags",
+      "type": ["null", "string"]
+    },
+    {
+      "name": "view_count",
+      "type": ["null", "string"]
+    }
+  ]
+}
