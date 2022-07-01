@@ -1,6 +1,6 @@
 ProductId, ProductName, Price, ProductType
-3,fish tank (small),250,null
-1,chair,100,furniture
-2,table,200,furniture
-4,Microwave,220,electric
 null,null,null,fish tank
+3,fish tank (small),250,null
+4,Microwave,220,electric
+2,table,200,furniture
+1,chair,100,furniture
