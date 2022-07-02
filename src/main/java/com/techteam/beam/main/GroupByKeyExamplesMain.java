@@ -2,17 +2,11 @@ package com.techteam.beam.main;
 
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.TextIO;
-import org.apache.beam.sdk.transforms.DoFn;
-import org.apache.beam.sdk.transforms.Filter;
-import org.apache.beam.sdk.transforms.MapElements;
-import org.apache.beam.sdk.transforms.ParDo;
+import org.apache.beam.sdk.transforms.*;
 import org.apache.beam.sdk.transforms.join.CoGbkResult;
 import org.apache.beam.sdk.transforms.join.CoGroupByKey;
 import org.apache.beam.sdk.transforms.join.KeyedPCollectionTuple;
-import org.apache.beam.sdk.values.KV;
-import org.apache.beam.sdk.values.PCollection;
-import org.apache.beam.sdk.values.TupleTag;
-import org.apache.beam.sdk.values.TypeDescriptors;
+import org.apache.beam.sdk.values.*;
 
 public class GroupByKeyExamplesMain {
     public static void main(String[] args) {
@@ -49,7 +43,6 @@ public class GroupByKeyExamplesMain {
                                 String row = c.element();
                                 assert row != null;
                                 String[] splits = row.split(",");
-
                                 c.output(KV.of(Integer.valueOf(splits[0]), String.join(",",
                                         splits[0], splits[1])));
                             }
@@ -63,7 +56,7 @@ public class GroupByKeyExamplesMain {
 
         result.apply("Preview grouped data",
                 MapElements.into(TypeDescriptors.strings()).via(
-                        x -> { System.out.println(x); return ""; })
+                        x -> { System.out.println("x ----> " + x); return ""; })
         );
 
         pipeline.run().waitUntilFinish();
