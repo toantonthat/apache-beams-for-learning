@@ -52,7 +52,7 @@ public class SideInputExampleMain {
                 double max = processContext.sideInput(maxPrice);
                 double price = Double.parseDouble(splits[3].trim());
 
-                //The product greater than average price :
+                //The product greater than average price
                 if (price >= max) {
                     System.out.println("product info: " + String.join(",", splits[0], splits[1], splits[2], splits[3]));
                 }
