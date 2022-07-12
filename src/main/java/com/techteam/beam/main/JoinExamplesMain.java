@@ -27,12 +27,12 @@ public class JoinExamplesMain {
                 Schema.Field.of("ProductName", Schema.FieldType.STRING),
                 Schema.Field.of("ProductTypeId", Schema.FieldType.INT32),
                 Schema.Field.of("Price", Schema.FieldType.INT32)
-        );
-        Schema productTypeSchema = Schema.of(Schema.Field.of("ProductTypeId", Schema.FieldType.INT32),
+        );Schema productTypeSchema = Schema.of(Schema.Field.of("ProductTypeId", Schema.FieldType.INT32),
                 Schema.Field.of("ProductType", Schema.FieldType.STRING)
         );
 
-        PCollection<Row> rightPCollection = pipeline
+
+        PCollection<Row> productPCollection = pipeline
                 .apply(TextIO.read().from(products))
                 .apply("FilterHeader", Filter.by(line -> !line.isEmpty()
                         && !line.contains("ProductId, ProductName, ProductTypeId, Price")))
@@ -50,7 +50,7 @@ public class JoinExamplesMain {
                     }
                 })).setRowSchema(productSchema)
                 ;
-        PCollection<Row> leftPCollection = pipeline
+        PCollection<Row> categoryPCollection = pipeline
                 .apply(TextIO.read().from(productTypes))
                 .apply("FilterHeader", Filter.by(line -> !line.isEmpty()
                         && !line.contains("ProductTypeId, ProductType")))
@@ -71,7 +71,7 @@ public class JoinExamplesMain {
         //Inner Join
 //        PCollection<Row> joinCollection = leftPCollection
 //                .apply("Create Join", Join.<Row, Row>innerJoin(rightPCollection)
-//                        //.using("ProductTypeId")
+////                        .using("ProductTypeId")
 //                        .on(Join.FieldsEqual.left("ProductTypeId")
 //                                .right("ProductId")
 //                        )
@@ -87,18 +87,17 @@ public class JoinExamplesMain {
 //                );
 
         //Right Join
-//        PCollection<Row> joinCollection = leftPCollection
-//                .apply("Create Join", Join.<Row, Row>rightOuterJoin(rightPCollection)
-//                        //.using("ProductTypeId")
-//                        .on(Join.FieldsEqual.left("ProductTypeId")
-//                                .right("ProductTypeId")
-//                        )
-//                );
+        PCollection<Row> joinCollection = categoryPCollection
+                .apply("Create Join", Join.<Row, Row>rightOuterJoin(productPCollection)
+                        //.using("ProductTypeId")
+                        .on(Join.FieldsEqual.left("ProductTypeId")
+                                .right("ProductTypeId")
+                        )
+                );
 
         //Full Join
-        PCollection<Row> joinCollection = leftPCollection
-                .apply("Create Join", Join.<Row, Row>fullOuterJoin(rightPCollection)
-                        //.using("ProductTypeId")
+        PCollection<Row> fullJoinCollection = categoryPCollection
+                .apply("Create Join", Join.<Row, Row>fullOuterJoin(productPCollection)
                         .on(Join.FieldsEqual.left("ProductTypeId")
                                 .right("ProductTypeId")
                         )

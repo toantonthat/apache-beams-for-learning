@@ -8,6 +8,8 @@ import org.apache.beam.sdk.transforms.join.CoGroupByKey;
 import org.apache.beam.sdk.transforms.join.KeyedPCollectionTuple;
 import org.apache.beam.sdk.values.*;
 
+import java.util.Objects;
+
 public class GroupByKeyExamplesMain {
     public static void main(String[] args) {
         runGroupByKeyBigQuery();
@@ -54,11 +56,31 @@ public class GroupByKeyExamplesMain {
         PCollection<KV<Integer, CoGbkResult>> result = KeyedPCollectionTuple.of(productTag, productCollection)
                         .and(productTypeTag, productTypeCollection).apply(CoGroupByKey.create());
 
-        result.apply("Preview grouped data",
-                MapElements.into(TypeDescriptors.strings()).via(
-                        x -> { System.out.println("x ----> " + x); return ""; })
-        );
+        PCollection<String> resultCollection = result
+                .apply(ParDo.of(new ProcessJoinColumns()))
+                ;
+
+        resultCollection
+                .apply(TextIO
+                        .write().withoutSharding()
+                        .to("result/group_products")
+                        .withHeader("ProductTypeId, ProductId, ProductName, Price, ProductType")
+                        .withSuffix(".csv"));
 
         pipeline.run().waitUntilFinish();
+    }
+
+    private static class ProcessJoinColumns extends DoFn<KV<Integer, CoGbkResult>, String> {
+        @ProcessElement
+        public void processElement(ProcessContext c) {
+            KV<Integer, CoGbkResult> joinedStream = c.element();
+            TupleTag product = joinedStream.getValue().getSchema().getTag(0);
+            TupleTag productType = joinedStream.getValue().getSchema().getTag(1);
+            String productRow = joinedStream.getValue().getOnly(product, 0) + "";
+            String productTypeRow = joinedStream.getValue().getOnly(productType, 0) + "";
+            c.output(String.join(",", joinedStream.getKey() + "",
+                    productRow, productTypeRow
+            ));
+        }
     }
 }
